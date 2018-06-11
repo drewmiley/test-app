@@ -20,11 +20,11 @@ export function itemsFetchDataSuccess(items) {
 }
 
 export function itemsFetchData(url) {
-    return (dispatch) => {
+    return dispatch => {
         dispatch(itemsIsLoading(true));
 
         fetch(url)
-            .then((response) => {
+            .then(response => {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
@@ -33,8 +33,8 @@ export function itemsFetchData(url) {
 
                 return response;
             })
-            .then((response) => response.json())
-            .then((items) => dispatch(itemsFetchDataSuccess(items)))
+            .then(response => response.json())
+            .then(items => dispatch(itemsFetchDataSuccess(items)))
             .catch(() => dispatch(itemsHasErrored(true)));
     };
 }

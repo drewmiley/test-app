@@ -1,10 +1,17 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers';
+import { combineReducers } from 'redux';
+import { items, itemsHasErrored, itemsIsLoading } from './reducers';
+
+const reducer = combineReducers({
+    items,
+    itemsHasErrored,
+    itemsIsLoading
+});
 
 export default function configureStore(initialState) {
     return createStore(
-        rootReducer,
+        reducer,
         initialState,
         applyMiddleware(thunk)
     );

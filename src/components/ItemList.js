@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { itemsFetchData } from '../actions/items';
+import { itemsFetchData } from '../ducks/actions';
 
 class ItemList extends Component {
     componentDidMount() {
@@ -28,7 +28,7 @@ class ItemList extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
         items: state.items,
         hasErrored: state.itemsHasErrored,
@@ -36,9 +36,9 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
     return {
-        fetchData: (url) => dispatch(itemsFetchData(url))
+        fetchData: url => dispatch(itemsFetchData(url))
     };
 };
 
