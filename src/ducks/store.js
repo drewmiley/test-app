@@ -5,8 +5,8 @@ import { items, itemsHasErrored, itemsIsLoading } from './reducers';
 
 const reducer = combineReducers({
     items,
-    itemsHasErrored,
-    itemsIsLoading
+    hasErrored: itemsHasErrored,
+    isLoading: itemsIsLoading
 });
 
 export default function configureStore(initialState) {
