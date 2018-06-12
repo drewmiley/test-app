@@ -12,9 +12,9 @@ class ItemList extends Component {
 
         return (
             <ul>
-                {this.props.items.map((item) => (
-                    <li key={item.id}>
-                        {item.label}
+                {this.props.items.map(item => (
+                    <li key={item._id}>
+                        {item.title}
                     </li>
                 ))}
             </ul>

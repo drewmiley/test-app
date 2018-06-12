@@ -6,7 +6,7 @@ import { itemsFetchData } from '../ducks/actions';
 
 class App extends Component {
     componentDidMount() {
-        this.props.fetchData('https://5826ed963900d612000138bd.mockapi.io/items');
+        this.props.fetchData('https://enigmatic-waters-95441.herokuapp.com/api/songs');
     }
 
     render() {
