@@ -5,96 +5,62 @@ import './App.css';
 import ItemList from '../components/ItemList';
 import { itemsFetchData } from '../ducks/actions';
 
-const BasicExample = () => (
-  <Router>
-    <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/topics">Topics</Link>
-        </li>
-      </ul>
-
-      <hr />
-
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/topics" component={Topics} />
-    </div>
-  </Router>
-);
-
 const Home = () => (
   <div>
     <h2>Home</h2>
   </div>
 );
 
-const About = () => (
+const Dummy = () => (
   <div>
-    <h2>About</h2>
+    <h2>Dummy</h2>
   </div>
 );
 
-const Topics = ({ match }) => (
-  <div>
-    <h2>Topics</h2>
-    <ul>
-      <li>
-        <Link to={`${match.url}/rendering`}>Rendering with React</Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/components`}>Components</Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
-      </li>
-    </ul>
+const homePath = '/';
+const dummyPath = '/dummy';
+const songsPath = '/songs';
 
-    <Route path={`${match.url}/:topicId`} component={Topic} />
-    <Route
-      exact
-      path={match.url}
-      render={() => <h3>Please select a topic.</h3>}
-    />
-  </div>
-);
+class AppRouter extends Component {
+    componentDidMount() {
+        this.props.fetchData('https://enigmatic-waters-95441.herokuapp.com/api/songs');
+    }
 
-const Topic = ({ match }) => (
-  <div>
-    <h3>{match.params.topicId}</h3>
-  </div>
-);
+    render() {
+        return (
+            <Router>
+                <div>
+                    <ul>
+                        <li>
+                            <Link to={homePath}>Home</Link>
+                        </li>
+                        <li>
+                            <Link to={dummyPath}>Dummy</Link>
+                        </li>
+                        <li>
+                            <Link to={songsPath}>Songs</Link>
+                        </li>
+                    </ul>
+                    <hr />
+                    <Route exact path={homePath} component={Home} />
+                    <Route path={dummyPath} component={Dummy} />
+                    <Route path={songsPath} render={() => (
+                        <ItemList
+                            items={this.props.items}
+                            hasErrored={this.props.hasErrored}
+                            isLoading={this.props.isLoading}
+                        />
+                    )} />
+                </div>
+            </Router>
+        );
+    }
+}
 
-export default BasicExample;
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchData: url => dispatch(itemsFetchData(url))
+    };
+};
 
-// class App extends Component {
-//     componentDidMount() {
-//         this.props.fetchData('https://enigmatic-waters-95441.herokuapp.com/api/songs');
-//     }
-// 
-//     render() {
-//         return (
-//             <div className="App">
-//                 <ItemList
-//                     items={this.props.items}
-//                     hasErrored={this.props.hasErrored}
-//                     isLoading={this.props.isLoading}
-//                 />
-//             </div>
-//         );
-//     }
-// }
-// 
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         fetchData: url => dispatch(itemsFetchData(url))
-//     };
-// };
-// 
-// export default connect(state => state, mapDispatchToProps)(App);
+export default connect(state => state, mapDispatchToProps)(AppRouter);
