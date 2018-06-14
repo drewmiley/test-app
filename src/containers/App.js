@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
 import './App.css';
-import ItemList from '../components/ItemList';
-import { itemsFetchData } from '../ducks/actions';
+import Songs from './Songs';
 
 const Home = () => (
   <div>
@@ -21,11 +20,7 @@ const homePath = '/';
 const dummyPath = '/dummy';
 const songsPath = '/songs';
 
-class AppRouter extends Component {
-    componentDidMount() {
-        this.props.fetchData('https://enigmatic-waters-95441.herokuapp.com/api/songs');
-    }
-
+export default class App extends Component {
     render() {
         return (
             <Router>
@@ -44,23 +39,9 @@ class AppRouter extends Component {
                     <hr />
                     <Route exact path={homePath} component={Home} />
                     <Route path={dummyPath} component={Dummy} />
-                    <Route path={songsPath} render={() => (
-                        <ItemList
-                            items={this.props.items}
-                            hasErrored={this.props.hasErrored}
-                            isLoading={this.props.isLoading}
-                        />
-                    )} />
+                    <Route path={songsPath} component={Songs} />
                 </div>
             </Router>
         );
     }
 }
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchData: url => dispatch(itemsFetchData(url))
-    };
-};
-
-export default connect(state => state, mapDispatchToProps)(AppRouter);
