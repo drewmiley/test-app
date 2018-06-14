@@ -2,23 +2,12 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import './App.css';
+import Playlist from './Playlist';
 import Songs from './Songs';
 
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-);
-
-const Dummy = () => (
-  <div>
-    <h2>Dummy</h2>
-  </div>
-);
-
 const homePath = '/';
-const dummyPath = '/dummy';
 const songsPath = '/songs';
+const playlistPath = '/playlist';
 
 export default class App extends Component {
     render() {
@@ -30,16 +19,20 @@ export default class App extends Component {
                             <Link to={homePath}>Home</Link>
                         </li>
                         <li>
-                            <Link to={dummyPath}>Dummy</Link>
+                            <Link to={songsPath}>Songs</Link>
                         </li>
                         <li>
-                            <Link to={songsPath}>Songs</Link>
+                            <Link to={playlistPath}>Playlist</Link>
                         </li>
                     </ul>
                     <hr />
-                    <Route exact path={homePath} component={Home} />
-                    <Route path={dummyPath} component={Dummy} />
+                    <Route exact path={homePath} render={() => (
+                        <div>
+                            <h2>Home</h2>
+                        </div>
+                    )} />
                     <Route path={songsPath} component={Songs} />
+                    <Route path={playlistPath} component={Playlist} />
                 </div>
             </Router>
         );

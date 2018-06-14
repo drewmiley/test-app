@@ -1,8 +1,12 @@
-export function itemsFetchData(url) {
+export const mapDispatchToProps = dispatch => {
+    return { fetchData: url => dispatch(itemsFetchData(url)) };
+};
+
+function itemsFetchData(apiRoute) {
     return dispatch => {
         dispatch(itemsIsLoading(true));
 
-        fetch(url)
+        fetch(`https://enigmatic-waters-95441.herokuapp.com/api${ apiRoute }`)
             .then(response => {
                 if (!response.ok) {
                     throw Error(response.statusText);

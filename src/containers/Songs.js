@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ItemList from '../components/ItemList';
-import { itemsFetchData } from '../ducks/actions';
+import { mapDispatchToProps } from '../ducks/actions';
 
 class Songs extends Component {
     componentDidMount() {
-        this.props.fetchData('https://enigmatic-waters-95441.herokuapp.com/api/songs');
+        this.props.fetchData('/songs');
     }
 
     render() {
@@ -19,11 +19,5 @@ class Songs extends Component {
         );
     }
 }
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchData: url => dispatch(itemsFetchData(url))
-    };
-};
 
 export default connect(state => state, mapDispatchToProps)(Songs);
