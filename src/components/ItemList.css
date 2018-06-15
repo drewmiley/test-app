@@ -1,0 +1,17 @@
+.songContainer {
+	height: 200px;
+}
+
+.songContainer > div:nth-child(1) {
+	height: 100%;
+	display: inline-block;
+}
+
+.songContainer > div:nth-child(1) > img {
+	height: 100%;
+}
+
+.songContainer > div:nth-child(2) {
+	display: inline-block;
+	margin-left: 20px;
+}

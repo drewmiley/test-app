@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './ItemList.css';
+
 class ItemList extends Component {
     render() {
         if (this.props.hasErrored) {
@@ -11,13 +13,20 @@ class ItemList extends Component {
         }
 
         return (
-            <ul>
+            <div>
                 {this.props.items.map(item => (
-                    <li key={item._id}>
-                        {item.title}
-                    </li>
+                    <div key={item._id} className='songContainer'>
+                        <div>
+                            <img src={item.imageURL} alt='BAD' />
+                        </div>
+                        <div>
+                            <p>{item.artist}</p>
+                            <p>{item.album}</p>
+                            <p>{item.title}</p>
+                        </div>
+                    </div>
                 ))}
-            </ul>
+            </div>
         );
     }
 }

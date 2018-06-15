@@ -28,7 +28,7 @@ export default class App extends Component {
                     <hr />
                     <Route exact path={homePath} render={() => (
                         <div>
-                            <h2>Home</h2>
+                            <h2>"Here's some songs and stuff"</h2>
                         </div>
                     )} />
                     <Route path={songsPath} component={Songs} />
